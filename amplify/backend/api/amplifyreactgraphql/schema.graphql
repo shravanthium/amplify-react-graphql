@@ -1,6 +1,12 @@
 type Note @model @auth(rules: [ { allow: public } ] ){
   id: ID!
+  date: String!
   name: String!
-  description: String
+  amount: Int
+  referencePerson: String
+  receiptNo: String
+  pan: String
+  phone: String
+  address: String
   image: String
 }

@@ -11,6 +11,11 @@ import {
   TextField,
   View,
   withAuthenticator,
+  Table,
+  TableCell,
+  TableBody,
+  TableHead,
+  TableRow,
 } from '@aws-amplify/ui-react';
 import { listNotes } from "./graphql/queries";
 import {
@@ -68,12 +73,22 @@ const App = ({ signOut }) => {
       variables: { input: { id } },
     });
   }
-
+  date: String!
+  name: String!
+  amount: Int
+  referencePerson: String
+  receiptNo: String
+  pan: String
+  phone: String
+  address: String
+  image: String
   return (
     <View className="App">
-      <Heading level={1}>My Notes App</Heading>
-      <View as="form" margin="3rem 0" onSubmit={createNote}>
-        <Flex direction="row" justifyContent="center">
+      <Heading level={1}>Aviratha</Heading>
+      <Divider
+    orientation="horizontal" />
+      <View as="form" padding="3rem" margin="3rem" onSubmit={createNote}>
+        <Flex direction={{ base: 'column', large: 'row' }} justifyContent="center">
           <TextField
             name="name"
             placeholder="Note Name"
@@ -83,9 +98,57 @@ const App = ({ signOut }) => {
             required
           />
           <TextField
-            name="description"
-            placeholder="Note Description"
-            label="Note Description"
+            name="date"
+            placeholder="Date"
+            label="Date"
+            labelHidden
+            variation="quiet"
+            required
+          />
+          <TextField
+            name="receiptNo"
+            placeholder="Receipt No"
+            label="Receipt No"
+            labelHidden
+            variation="quiet"
+            required
+          />
+          <TextField
+            name="pan"
+            placeholder="PAN"
+            label="PAN"
+            labelHidden
+            variation="quiet"
+            required
+          />
+          <TextField
+            name="referencePerson"
+            placeholder="Reference Person"
+            label="Reference Person"
+            labelHidden
+            variation="quiet"
+            required
+          />
+          <TextField
+            name="amount"
+            placeholder="Amount"
+            label="Amount"
+            labelHidden
+            variation="quiet"
+            required
+          />
+          <TextField
+            name="phone"
+            placeholder="Phone"
+            label="Phone"
+            labelHidden
+            variation="quiet"
+            required
+          />
+          <TextField
+            name="address"
+            placeholder="Address"
+            label="Address"
             labelHidden
             variation="quiet"
             required
@@ -94,38 +157,60 @@ const App = ({ signOut }) => {
             name="image"
             as="input"
             type="file"
-            style={{ alignSelf: "end" }}
           />
           <Button type="submit" variation="primary">
-            Create Note
+            Submit
           </Button>
         </Flex>
       </View>
-      <Heading level={2}>Current Notes</Heading>
-      <View margin="3rem 0">
-        {notes.map((note) => (
-          <Flex
-            key={note.id || note.name}
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Text as="strong" fontWeight={700}>
-              {note.name}
-            </Text>
-            <Text as="span">{note.description}</Text>
-            {note.image && (
-              <Image
-                src={note.image}
-                alt={`visual aid for ${notes.name}`}
-                style={{ width: 400 }}
-              />
-            )}
-            <Button variation="link" onClick={() => deleteNote(note)}>
-              Delete note
-            </Button>
-          </Flex>
-        ))}
+      <Heading level={2}>Donors Lists</Heading>
+      <View padding="3rem" margin="3rem">
+
+        <Flex
+          direction={{ base: 'column', large: 'row' }}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Table overflow-x="auto">
+            <TableHead>
+              <TableRow>
+                <TableCell as="th">Name</TableCell>
+                <TableCell as="th">Description</TableCell>
+                <TableCell as="th">Image</TableCell>
+                <TableCell as="th"></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {notes.map((note) => (
+                <TableRow key={note.id || note.name}>
+                  <TableCell>{note.name}</TableCell>
+                  <TableCell>
+                    {note.amount}
+                    {note.receiptNo}
+                    {note.pan}
+                    {note.amount}
+                    {note.phone}
+                    {note.referencePerson}
+                  </TableCell>
+                  <TableCell>{note.image && (
+                    <Image
+                      src={note.image}
+                      alt={`visual aid for ${notes.name}`}
+                      backgroundColor="initial"
+                      height="40px"
+                      opacity="100%"
+                    />
+                  )}</TableCell>
+                  <TableCell>
+                    <Button variation="link" onClick={() => deleteNote(note)}>
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Flex>
       </View>
       <Button onClick={signOut}>Sign Out</Button>
     </View>
