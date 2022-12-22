@@ -5,8 +5,8 @@ export const onCreateNote = /* GraphQL */ `
   subscription OnCreateNote($filter: ModelSubscriptionNoteFilterInput) {
     onCreateNote(filter: $filter) {
       id
-      date
       name
+      date
       amount
       referencePerson
       receiptNo
@@ -23,8 +23,8 @@ export const onUpdateNote = /* GraphQL */ `
   subscription OnUpdateNote($filter: ModelSubscriptionNoteFilterInput) {
     onUpdateNote(filter: $filter) {
       id
-      date
       name
+      date
       amount
       referencePerson
       receiptNo
@@ -41,8 +41,8 @@ export const onDeleteNote = /* GraphQL */ `
   subscription OnDeleteNote($filter: ModelSubscriptionNoteFilterInput) {
     onDeleteNote(filter: $filter) {
       id
-      date
       name
+      date
       amount
       referencePerson
       receiptNo

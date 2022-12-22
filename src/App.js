@@ -53,10 +53,17 @@ const App = ({ signOut }) => {
     const image = form.get("image");
     const data = {
       name: form.get("name"),
-      description: form.get("description"),
+      referencePerson: form.get("referencePerson"),
+      pan: form.get("pan"),
+      amount: form.get("amount"),
+      receiptNo: form.get("receiptNo"),
+      phone: form.get("phone"),
+      date: form.get("date"),
+      address: form.get("address"),
       image: image.name,
     };
     if (!!data.image) await Storage.put(data.name, image);
+    console.log(data);
     await API.graphql({
       query: createNoteMutation,
       variables: { input: data },
