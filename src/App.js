@@ -10,6 +10,7 @@ import {
   Text,
   TextField,
   View,
+  Divider,
   withAuthenticator,
   Table,
   TableCell,
@@ -73,26 +74,20 @@ const App = ({ signOut }) => {
       variables: { input: { id } },
     });
   }
-  date: String!
-  name: String!
-  amount: Int
-  referencePerson: String
-  receiptNo: String
-  pan: String
-  phone: String
-  address: String
-  image: String
+
   return (
     <View className="App">
       <Heading level={1}>Aviratha</Heading>
       <Divider
     orientation="horizontal" />
+    
       <View as="form" padding="3rem" margin="3rem" onSubmit={createNote}>
-        <Flex direction={{ base: 'column', large: 'row' }} justifyContent="center">
+      <Heading level={4}>Donation Details</Heading>
+        <Flex direction={{ base: 'column' }} justifyContent="center">
           <TextField
             name="name"
-            placeholder="Note Name"
-            label="Note Name"
+            placeholder="Name"
+            label="Name"
             labelHidden
             variation="quiet"
             required
@@ -163,7 +158,7 @@ const App = ({ signOut }) => {
           </Button>
         </Flex>
       </View>
-      <Heading level={2}>Donors Lists</Heading>
+      <Heading level={4}>Donors Lists</Heading>
       <View padding="3rem" margin="3rem">
 
         <Flex
